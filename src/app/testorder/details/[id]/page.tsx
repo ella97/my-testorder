@@ -1,10 +1,4 @@
  'use client';
- import {
-  LabRequestProps,
-  RejectionCriteriaProps,
-  RequestItemsProp,
-  SplashProps,
-} from '@/amaryllis-types';
 import Layout from '@/components/Layout';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
