@@ -25,7 +25,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { IRequestItems } from "@/amaryllis-types";
-
 import { useState } from "react";
 import { specimen_list } from "@/data";
 
@@ -36,7 +35,7 @@ const filterProps: any = [
     title: "Status",
     options: [
       {
-        value: "PendingCollection",
+        value: "Pending",
         label: "Pending",
         icon: AlertTriangle,
       },
