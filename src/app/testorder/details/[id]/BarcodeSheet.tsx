@@ -201,6 +201,16 @@ const BarcodeSheet = ({
               </div>
             </div>
           </div>
+          <div className="bg-background sticky bottom-0 mt-auto border-t p-4">
+            <SheetFooter className="flex justify-end gap-2">
+              <Button variant="outline" className="uppercase shadow-none">
+                <XCircle className="h-4 w-4" /> Dismiss
+              </Button>
+              <Button variant="default" className="uppercase shadow-none">
+                <Printer className="h-4 w-4" /> Print Label
+              </Button>
+            </SheetFooter>
+          </div>
         </div>
       </SheetContent>
     </Sheet>
