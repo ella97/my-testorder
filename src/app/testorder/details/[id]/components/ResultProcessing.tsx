@@ -81,7 +81,7 @@ const configAtom = atom<Config>({
   selected: null,
 });
 
-const ResultProcessing = ({ requestData }: { requestData: any }) => {
+const ResultProcessing = ({}) => {
   const router = useRouter();
   const [openResult, setOpenResult] = React.useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
@@ -94,21 +94,21 @@ const ResultProcessing = ({ requestData }: { requestData: any }) => {
     React.useState<IObservationResult>();
   const [resultItem, setResultItem] = React.useState<string>("");
 
-  const [test, setTest] = useAtom(configAtom);
-  const token = useToken();
-  const user = useGetUser();
+  // const [test, setTest] = useAtom(configAtom);
+  // const token = useToken();
+  // const user = useGetUser();
 
-  const requestItems = useMemo(
-    () => requestData?.labRequestItems || [],
-    [requestData]
-  );
+  // const requestItems = useMemo(
+  //   () => requestData?.labRequestItems || [],
+  //   [requestData]
+  // );
 
   // Filter items based on the search term (case-insensitive)
-  const filteredItems = requestItems.filter(
-    (item: any) =>
-      item.parameterName.toLowerCase().includes(searchedTest.toLowerCase()) ??
-      requestItems
-  );
+  // const filteredItems = requestItems.filter(
+  //   (item: any) =>
+  //     item.parameterName.toLowerCase().includes(searchedTest.toLowerCase()) ??
+  //     requestItems
+  // );
 
   // Handler for search input change
   const handleChange = (e: any) => {
@@ -120,62 +120,101 @@ const ResultProcessing = ({ requestData }: { requestData: any }) => {
     setSearchedTest("");
   };
 
-  const [selectedParam, setSelectedParam] = useState<string>(
-    requestItems[0].parameterId
-  );
+  // const [selectedParam, setSelectedParam] = useState<string>(
+  //   requestItems[0].parameterId
+  // );
 
-  const [accessionNumber, setAccessionNumber] = useState<string>(
-    requestItems[0].accessionNumber
-  );
+  // const [accessionNumber, setAccessionNumber] = useState<string>(
+  //   requestItems[0].accessionNumber
+  // );
 
-  useEffect(() => {
-    if (requestItems.length > 0) {
-      setTest({ selected: requestItems[0].labRequestItemsId });
-    }
-  }, [requestItems, setTest]);
+  // useEffect(() => {
+  //   if (requestItems.length > 0) {
+  //     setTest({ selected: requestItems[0].labRequestItemsId });
+  //   }
+  // }, [requestItems, setTest]);
 
-  const {
-    mutate: submitConfig,
-    isPending,
-    isSuccess,
-    isError,
-    data: configData,
-  } = useFetchParameterProfileMutation();
+  // const {
+  //   mutate: submitConfig,
+  //   isPending,
+  //   isSuccess,
+  //   isError,
+  //   data: configData,
+  // } = useFetchParameterProfileMutation();
 
-  useEffect(() => {
-    if (isSuccess) {
-      setConfigList(configData?.data);
-      setOpenResult(true);
-    }
-  }, [configData, isSuccess]);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     setConfigList(configData?.data);
+  //     setOpenResult(true);
+  //   }
+  // }, [configData, isSuccess]);
 
-  const fetchConfig = () => {
-    const payload: any = {
-      token: token,
-      parameterId: selectedParam,
-    };
+  // const fetchConfig = () => {
+  //   const payload: any = {
+  //     token: token,
+  //     parameterId: selectedParam,
+  //   };
 
-    submitConfig(payload);
-  };
+  //   submitConfig(payload);
+  // };
 
-  const processEditRequest = (
-    item: IObservationResult,
-    requestItemResultId: string
-  ) => {
-    setSelectedResult(item);
-    setResultItem(requestItemResultId);
-    setOpenEdit(true);
-  };
+  // const processEditRequest = (
+  //   item: IObservationResult,
+  //   requestItemResultId: string
+  // ) => {
+  //   setSelectedResult(item);
+  //   setResultItem(requestItemResultId);
+  //   setOpenEdit(true);
+  // };
 
-  const processAuthorization = (requestItemResultId: string) => {
-    setResultItem(requestItemResultId);
-    setOpenConfirm(true);
-  };
+  // const processAuthorization = (requestItemResultId: string) => {
+  //   setResultItem(requestItemResultId);
+  //   setOpenConfirm(true);
+  // };
 
   const TestList = () => {
     return (
       <ScrollArea className="h-[55dvh]">
-        {filteredItems.length > 0 ? (
+        <div className="divide-muted flex flex-col gap-2 divide-y pt-0">
+          <button
+            className={cn(
+              "relative flex cursor-pointer flex-col items-start gap-2 p-2 text-left text-sm",
+              "bg-accent border-primary/20 border-y"
+            )}
+          >
+            <div
+              className={cn(
+                "absolute top-0 bottom-0 left-0 w-1 transition-all duration-300"
+              )}
+            />
+            <div className="flex w-full flex-col">
+              <div>
+                <div className="flex w-full flex-row items-center justify-between">
+                  <div className="text-green-600 text-sm font-medium uppercase">
+                    {/* #{item?.accessionNumber} */} 009
+                  </div>
+                  <div className="bg-orange-500/20 rounded-md p-1">
+                    <AlertTriangle className="size-4 text-orange-500" />
+                  </div>
+                </div>
+                <h1 className="text-lg font-semibold text-pretty uppercase">
+                  {" "}
+                  Parameter Name{" "}
+                </h1>
+                <Decorator />
+              </div>
+              <div className="mt-1 text-sm">
+                <p className="font-medium uppercase">
+                  <span className={"text-sm"}> CODE: 20110 </span>
+                  {" · "}
+                  <span className="font-normal">Specimen:</span> Whole Blood
+                </p>
+              </div>
+            </div>
+          </button>
+        </div>
+        {/* <p> No test found </p> */}
+        {/* {filteredItems.length > 0 ? (
           <div className="divide-muted flex flex-col gap-2 divide-y pt-0">
             {filteredItems?.map((item: IRequestItems, index: number) => {
               const selected = test.selected === item?.labRequestItemsId;
@@ -203,8 +242,8 @@ const ResultProcessing = ({ requestData }: { requestData: any }) => {
                     <div>
                       <div className="flex w-full flex-row items-center justify-between">
                         <div className="text-primary text-sm font-medium uppercase">
-                          #{item?.accessionNumber}
-                        </div>
+                          {/* #{item?.accessionNumber} */}
+        {/* </div>
                         <div
                           className={cn(
                             item.requestResult === null
@@ -243,7 +282,7 @@ const ResultProcessing = ({ requestData }: { requestData: any }) => {
           </div>
         ) : (
           <p className="text-center text-gray-500">No test found.</p>
-        )}
+        )} */}
       </ScrollArea>
     );
   };
@@ -329,15 +368,10 @@ const ResultProcessing = ({ requestData }: { requestData: any }) => {
               </DropdownMenuContent>
             </DropdownMenu>
             {test?.requestResult === null ? (
-              <ActionButton
-                isPending={isPending}
-                variant="default"
-                className="uppercase"
-                onClick={() => fetchConfig()}
-              >
+              <Button variant="default" className="uppercase">
                 <ListPlus className="h-4 w-4" />
                 Post Result
-              </ActionButton>
+              </Button>
             ) : (
               <Button disabled variant="default" className="uppercase">
                 <ListPlus className="h-4 w-4" />
@@ -355,13 +389,13 @@ const ResultProcessing = ({ requestData }: { requestData: any }) => {
                   <h1 className="mx-2 my-1 font-medium uppercase">
                     Showing Results for{" "}
                     <span className="text-medeor font-semibold">
-                      {test?.parameterName}
+                      {/* {test?.parameterName} */}
                     </span>
                   </h1>
                   <div className="mx-2 my-1 flex flex-row items-center justify-between text-sm">
                     <p>
-                      Posted By: {test?.requestResult?.postedBy} from{" "}
-                      {test?.requestResult?.equipment}
+                      {/* Posted By: {test?.requestResult?.postedBy} from{" "}
+                      {test?.requestResult?.equipment} */}
                     </p>
                     <p className="text-muted-foreground">
                       {/* Posted {formatPostedDate(test?.requestResult?.postedDate)} */}
@@ -462,21 +496,7 @@ const ResultProcessing = ({ requestData }: { requestData: any }) => {
                 </div>
                 <div className="bg-background sticky bottom-0 mt-5 border-t">
                   <div className="mt-2 flex flex-row items-center justify-end space-x-2 px-2">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="uppercase"
-                      disabled={
-                        test?.requestResult?.authorized ||
-                        test?.requestResult === null
-                        //|| test?.requestResult?.postedBy === user?.userName
-                      }
-                      onClick={() =>
-                        processAuthorization(
-                          test?.requestResult?.requestItemResultId
-                        )
-                      }
-                    >
+                    <Button size="sm" variant="outline" className="uppercase">
                       <CheckCircle2 className="h-4 w-4" />
                       Authorize Results
                     </Button>
@@ -491,7 +511,7 @@ const ResultProcessing = ({ requestData }: { requestData: any }) => {
                 <div className="flex flex-row items-center justify-between">
                   <span className="text-muted-foreground">Specimen</span>
                   <span className="text-medeor font-semibold uppercase">
-                    {test?.specimen}
+                    {/* {test?.specimen} */}
                   </span>
                 </div>
                 <Separator className="bg-input/40" />
@@ -500,7 +520,7 @@ const ResultProcessing = ({ requestData }: { requestData: any }) => {
                     Accession Number
                   </span>
                   <span className="flex flex-row items-center font-medium uppercase">
-                    {test?.accessionNumber}
+                    {/* {test?.accessionNumber} */}
                   </span>
                 </div>
                 <Separator className="bg-input/40" />
@@ -511,7 +531,7 @@ const ResultProcessing = ({ requestData }: { requestData: any }) => {
                     </p>
                   </div>
                   <div className="text-muted-foreground flex flex-row items-center font-medium uppercase">
-                    {!test?.requestResult?.authorized ? (
+                    {/* {!test?.requestResult?.authorized ? (
                       <AlertCircle className="mr-2 h-4 w-4 text-red-600" />
                     ) : (
                       <CheckCircle2 className="mr-2 h-4 w-4 text-green-600" />
@@ -526,7 +546,7 @@ const ResultProcessing = ({ requestData }: { requestData: any }) => {
                       {!test?.requestResult?.authorized
                         ? "Pending"
                         : "Authorized"}
-                    </p>
+                    </p> */}
                   </div>
                 </div>
                 <Separator className="bg-input/40" />
@@ -536,7 +556,7 @@ const ResultProcessing = ({ requestData }: { requestData: any }) => {
                   </div>
                   <div className="flex flex-col items-end">
                     <p className="text-muted-foreground">
-                      {test?.parameterName} / {test?.parameterIso}
+                      {/* {test?.parameterName} / {test?.parameterIso} */}
                     </p>
                     <span className="font-medium"></span>
                   </div>
@@ -550,7 +570,7 @@ const ResultProcessing = ({ requestData }: { requestData: any }) => {
                     <p className="text-muted-foreground text-sm">
                       Collected By
                     </p>
-                    <span className="font-medium">{test?.collectedBy}</span>
+                    {/* <span className="font-medium">{test?.collectedBy}</span> */}
                   </div>
                   <div className="flex flex-col items-end">
                     <p className="text-muted-foreground text-sm">
@@ -621,13 +641,13 @@ const ResultProcessing = ({ requestData }: { requestData: any }) => {
 
   return (
     <>
-      <PostLabResult
+      {/* <PostLabResult
         open={openResult}
         setOpen={setOpenResult}
         paramList={configList}
-        referenceNumber={accessionNumber}
-        labRequestItemId={test.selected}
-      />
+        referenceNumber={"009"}
+        labRequestItemId={""}
+      /> */}
       <ConfirmAuthorization
         open={openConfirm}
         setOpen={setOpenConfirm}
@@ -688,14 +708,15 @@ const ResultProcessing = ({ requestData }: { requestData: any }) => {
         </div>
 
         <div className="full flex h-[calc(100vh-23vh)] w-full grow">
-          <TestDisplay
+          {/* <TestDisplay
             test={
               requestItems.find(
                 (item: IRequestItems) =>
                   item.labRequestItemsId === test.selected
               ) || null
             }
-          />
+          /> */}
+          <TestDisplay />
         </div>
       </div>
     </>

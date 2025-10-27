@@ -39,8 +39,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
-// import CollectionLog from '@/app/testorder/details/[id]/components/CollectionLog';
-// import RecollectDialog from '@/app/testorder/details/[id]/components/RecollectDialog';
+import CollectionLog from "@/app/testorder/details/[id]/components/CollectionLog";
+import RecollectDialog from "@/app/testorder/details/[id]/components/RecollectDialog";
 
 const statuses: any = [
   {
@@ -244,6 +244,16 @@ export const RequestItemColumn = [
             onOpen={setOpenBarcode}
             options={request}
           />
+          <CollectionLog
+            open={openLog}
+            setOpen={setOpenLog}
+            options={request}
+          />
+          <RecollectDialog
+            open={openRecollection}
+            onOpen={setOpenRecollection}
+            request={request}
+          />
           <div className="flex flex-row items-center space-x-2">
             <TooltipProvider>
               <Tooltip>
@@ -326,7 +336,10 @@ export const RequestItemColumn = [
                   <ArrowLeftRight className="mr-2 h-4 w-4" /> Change Specimen{" "}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="cursor-pointer">
+                <DropdownMenuItem
+                  onClick={() => setOpenLog(true)}
+                  className="cursor-pointer"
+                >
                   <Printer className="mr-2 h-4 w-4" />
                   Collection Log{" "}
                 </DropdownMenuItem>
@@ -334,6 +347,7 @@ export const RequestItemColumn = [
                 <DropdownMenuItem
                   className="cursor-pointer"
                   disabled={request?.isRecollected === true}
+                  onClick={() => setOpenRecollection(true)}
                 >
                   <RotateCcw className="mr-2 h-4 w-4" />
                   Recollect Specimen

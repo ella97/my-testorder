@@ -14,7 +14,8 @@ import { Badge } from "@/components/ui/badge";
 import CollectSpecimen from "@/app/testorder/details/[id]/components/CollectSpecimen";
 import VerificationSheet from "@/app/testorder/details/[id]/components/VerificationSheet";
 import ReceiveSpecimen from "@/app/testorder/details/[id]/components/ReceiveSpecimen";
-
+import ResultProcessing from "@/app/testorder/details/[id]/components/ResultProcessing";
+import { specimen_list } from "@/data";
 const orderOptions = [
   {
     id: 3,
@@ -131,9 +132,9 @@ const TestOrderDetails = () => {
             <TabsContent value={"receive"}>
               <ReceiveSpecimen />
             </TabsContent>
-            {/* <TabsContent value={'processing'}>
-                <ResultProcessing requestData={requestData} />
-              </TabsContent> */}
+            <TabsContent value={"processing"}>
+              <ResultProcessing  />
+            </TabsContent>
           </Tabs>
         </div>
       </div>

@@ -25,32 +25,32 @@ const RecollectDialog = ({
   onOpen: any;
   request: LabRequestItem;
 }) => {
-  const token = useToken();
-  const queryClient = useQueryClient();
+  // const token = useToken();
+  // const queryClient = useQueryClient();
 
-  const {
-    mutate: submitRequest,
-    isPending,
-    isSuccess,
-    isError,
-    data,
-  } = useRecollectSpecimenMutation();
+  // const {
+  //   mutate: submitRequest,
+  //   isPending,
+  //   isSuccess,
+  //   isError,
+  //   data,
+  // } = useRecollectSpecimenMutation();
 
-  useEffect(() => {
-    if (isSuccess) {
-      queryClient.invalidateQueries().then((res) => onOpen(false));
-    }
-  }, [isSuccess, onOpen, queryClient]);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     queryClient.invalidateQueries().then((res) => onOpen(false));
+  //   }
+  // }, [isSuccess, onOpen, queryClient]);
 
-  const processRecollection = () => {
-    const payload: any = {
-      //   token: token,
-      labRequestId: request.labRequestId,
-      labRequestItemId: request.labRequestItemsId,
-    };
+  // const processRecollection = () => {
+  //   const payload: any = {
+  //     //   token: token,
+  //     labRequestId: request.labRequestId,
+  //     labRequestItemId: request.labRequestItemsId,
+  //   };
 
-    submitRequest(payload);
-  };
+  //   submitRequest(payload);
+  // };
   return (
     <Dialog open={open} onOpenChange={onOpen}>
       <DialogContent>
@@ -72,13 +72,11 @@ const RecollectDialog = ({
               {" "}
               <XCircle className="h-4 w-4" /> Dismiss
             </Button>
-            <ActionButton
-              isPending={isPending}
-              onClick={() => processRecollection()}
+            <Button
             >
               <CheckCircle2 className="h-4 w-4" />
               Submit Recollection
-            </ActionButton>
+            </Button>
           </DialogFooter>
         </div>
       </DialogContent>
