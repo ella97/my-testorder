@@ -8,13 +8,10 @@ import {
 } from "@/components/ui/sheet";
 import Decorator from "@/components/Decorator";
 import { IObservationResult, IParameterConfig } from "@/amaryllis-types";
-import { useFetchParameterConfigQuery } from "@/hooks/config";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { AddParameterSchema, EditResultParamSchema } from "@/app/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToken } from "@/hooks/use-token";
-import StatusHandler from "@/components/StatusHandler";
 import {
   Form,
   FormControl,
@@ -43,11 +40,10 @@ import {
   CommandEmpty,
   CommandGroup,
   CommandInput,
-  CommandItem,
   CommandList,
 } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
-import ActionButton from "@/components/ui/action-button";
+// import ActionButton from "@/components/ui/action-button";
 
 const EditResultSheet = ({
   open,
@@ -139,11 +135,11 @@ const EditResultSheet = ({
           </SheetDescription>
           <Decorator />
         </SheetHeader>
-        <StatusHandler
+        {/* <StatusHandler
           isLoading={configLoading}
           isSuccess={configSuccess}
           isError={configError}
-        >
+        > */}
           <Form {...EditParameterForm}>
             <form
               onSubmit={EditParameterForm.handleSubmit(onSubmit)}
@@ -304,7 +300,7 @@ const EditResultSheet = ({
               </div>
             </form>
           </Form>
-        </StatusHandler>
+        {/* </StatusHandler> */}
       </SheetContent>
     </Sheet>
   );

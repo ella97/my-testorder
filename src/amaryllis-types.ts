@@ -282,6 +282,7 @@ export interface LabRequestProps {
   totalReceived: number;
   totalProcessed: number;
   totalSaved: number;
+  clinician: string;
   totalSubmitted: number;
   requestNotes: string;
   attachments: string;
@@ -292,6 +293,7 @@ export interface LabRequestProps {
   createdDate: string;
   patientNumber: string;
   birthDate: string;
+  pocVerified: boolean;
   labRequestItems: LabRequestItem[];
 }
 
@@ -967,8 +969,25 @@ export interface ICollectionLog {
   status: string;
   collectedDate: string;
   collectedBy: string;
-  receptionLog: null;
-  rejectionLog: null;
+  receptionLog: IReceptionLog;
+  rejectionLog: IRejectionLog;
+}
+
+export interface IReceptionLog {
+  receivingLogId: string;
+  referenceNumber: string;
+  receivedBy: string;
+  status: string;
+  receivedDate: string;
+}
+
+export interface IRejectionLog {
+  rejectionLogId: string;
+  criteria: string;
+  rejectedBy: string;
+  remarks: string;
+  status: string;
+  dateCreated: string;
 }
 
 export type IUserList = {
@@ -1046,4 +1065,162 @@ export interface IReportInterface {
 export interface Record {
   testName: string;
   total: number;
+}
+
+export interface MFS100Response<T = any> {
+  httpStatus: boolean;
+  data?: T;
+  error?: string;
+}
+
+export interface MFS100Info {
+  deviceInfo: string;
+  serialNumber: string;
+}
+
+export interface CaptureRequest {
+  Quality: number;
+  TimeOut: number;
+}
+
+export interface CaptureResponse {
+  Quality: number;
+  Nfiq: number;
+  AnsiTemplate?: string;
+  BitmapData?: string;
+  IsoTemplate?: string;
+  IsoImage?: string;
+  InHeight?: string;
+  InWidth?: string;
+  RawData?: string;
+  WsqImage?: string;
+}
+
+export interface VerifyRequest {
+  ProbTemplate: string;
+  GalleryTemplate: string;
+  BioType: "FMR" | "ANSI";
+}
+
+export interface VerifyResponse {
+  Status: boolean;
+  MatchScore: number;
+}
+
+export interface MatchRequest {
+  Quality: number;
+  TimeOut: number;
+  GalleryTemplate: string;
+  BioType: "FMR" | "ANSI";
+}
+
+export interface KeyInfoRequest {
+  Key: string;
+}
+
+export interface Biometric {
+  BioType: string;
+  BiometricData: string;
+  Pos: string;
+  Nfiq: number;
+  Na: boolean;
+}
+
+export interface PidDataRequest {
+  Biometrics: Biometric[];
+}
+
+export interface TFinger {
+  value: string;
+  label: string;
+  selections: TFingerSelections[];
+}
+
+export interface TFingerSelections {
+  code: string;
+  finger: string;
+}
+
+export interface TWorklist {
+  workListId: string;
+  equipment: string;
+  reference: string;
+  workListName: string;
+  department: string;
+  startDate: string;
+  endDate: string;
+  createdDate: string;
+  totalItems: number;
+}
+
+export interface TDisposal {
+  labRequestItemsId: string;
+  labRequestId: string;
+  patientName: string;
+  gender: string;
+  birthDate: string;
+  parameterId: string;
+  parameterIso: string;
+  parameterName: string;
+  chargedAmount: number;
+  authorized: boolean;
+  status: string;
+  specimenColor: string;
+  specimenIso: string;
+  specimen: string;
+  reference: string;
+  accessionNumber: string;
+  lifespan: string;
+}
+
+export interface TInvoice {
+  invoiceId: string;
+  invoiceNumber: string;
+  invoiceDate: string;
+  totalAmount: number;
+  discount: number;
+  tax: number;
+  patient: string;
+  status: string;
+  totalItems: number;
+}
+
+export interface TQuality {
+  qualityControlId: string;
+  equipment: string;
+  controlName: string;
+  controlDescription: string;
+  unit: string;
+  inParameter: string;
+  levels: number;
+  createdDate: string;
+}
+
+export interface TInventory {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  sku: string;
+  currentStock: number;
+  threshold: number;
+  createdBy: string;
+  batches: number;
+  createdDate: string;
+}
+
+export interface TNormalizedLabReq {
+  labRequestId: string;
+  reference: string;
+  patientId: string;
+  number: string;
+  patientName: string;
+  items: TRequestItem[];
+}
+
+export interface TRequestItem {
+  labRequestItemId: string;
+  specimen: string;
+  code: string;
+  parameter: string;
 }

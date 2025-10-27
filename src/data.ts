@@ -1123,3 +1123,57 @@ export const departments = [
     date: "21-Mar-2024, 12:20 PM",
   },
 ];
+export const fingers: TFinger[] = [
+  {
+    value: "L",
+    label: "LEFT HAND",
+    selections: [
+      {
+        code: "L1",
+        finger: "Pinky Finger",
+      },
+      {
+        code: "L2",
+        finger: "Ring Finger",
+      },
+      {
+        code: "L3",
+        finger: "Middle Finger",
+      },
+      {
+        code: "L4",
+        finger: "Index Finger",
+      },
+      {
+        code: "L5",
+        finger: "Thumb Finger",
+      },
+    ],
+  },
+  {
+    value: "R",
+    label: "RIGHT HAND",
+    selections: [
+      {
+        code: "R1",
+        finger: "Pinky Finger",
+      },
+      {
+        code: "R2",
+        finger: "Ring Finger",
+      },
+      {
+        code: "R3",
+        finger: "Middle Finger",
+      },
+      {
+        code: "R4",
+        finger: "Index Finger",
+      },
+      {
+        code: "R5",
+        finger: "Thumb Finger",
+      },
+    ],
+  },
+];
