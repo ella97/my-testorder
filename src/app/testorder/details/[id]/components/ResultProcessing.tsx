@@ -212,6 +212,42 @@ const ResultProcessing = ({}) => {
               </div>
             </div>
           </button>
+          <button
+            className={cn(
+              "relative flex cursor-pointer flex-col items-start gap-2 p-2 text-left text-sm",
+              "bg-accent border-primary/20 border-y"
+            )}
+          >
+            <div
+              className={cn(
+                "absolute top-0 bottom-0 left-0 w-1 transition-all duration-300"
+              )}
+            />
+            <div className="flex w-full flex-col">
+              <div>
+                <div className="flex w-full flex-row items-center justify-between">
+                  <div className="text-green-600 text-sm font-medium uppercase">
+                    {/* #{item?.accessionNumber} */} 009
+                  </div>
+                  <div className="bg-orange-500/20 rounded-md p-1">
+                    <AlertTriangle className="size-4 text-orange-500" />
+                  </div>
+                </div>
+                <h1 className="text-lg font-semibold text-pretty uppercase">
+                  {" "}
+                  Parameter Name{" "}
+                </h1>
+                <Decorator />
+              </div>
+              <div className="mt-1 text-sm">
+                <p className="font-medium uppercase">
+                  <span className={"text-sm"}> CODE: 20110 </span>
+                  {" · "}
+                  <span className="font-normal">Specimen:</span> Whole Blood
+                </p>
+              </div>
+            </div>
+          </button>
         </div>
         {/* <p> No test found </p> */}
         {/* {filteredItems.length > 0 ? (
