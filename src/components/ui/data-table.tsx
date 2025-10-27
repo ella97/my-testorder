@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   ColumnDef,
@@ -13,7 +13,7 @@ import {
   SortingState,
   useReactTable,
   VisibilityState,
-} from '@tanstack/react-table';
+} from "@tanstack/react-table";
 
 import {
   Table,
@@ -22,10 +22,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import React, { useEffect } from 'react';
-import { DataTablePagination } from '@/components/ui/data-table-pagination';
-import { DataTableToolbar } from '@/components/ui/data-table-toolbar';
+} from "@/components/ui/table";
+import React, { useEffect } from "react";
+import { DataTablePagination } from "@/components/ui/data-table-pagination";
+import { DataTableToolbar } from "@/components/ui/data-table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -37,13 +37,13 @@ interface DataTableProps<TData, TValue> {
 }
 
 export function DataTable<TData, TValue>({
-                                           columns,
-                                           data,
-                                           searchField,
-                                           fieldName,
-                                           filterProperties,
-                                           setSelected,
-                                         }: DataTableProps<TData, TValue>) {
+  columns,
+  data,
+  searchField,
+  fieldName,
+  filterProperties,
+  setSelected,
+}: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -94,9 +94,9 @@ export function DataTable<TData, TValue>({
         filterProperties={filterProperties}
       />
 
-      <div className='rounded-md border text-base'>
+      <div className="rounded-md border text-base">
         <Table>
-          <TableHeader className='bg-secondary uppercase'>
+          <TableHeader className="bg-secondary uppercase">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -105,21 +105,21 @@ export function DataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   );
                 })}
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody className='text-sm bg-card'>
+          <TableBody className="text-sm bg-card">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && 'selected'}
+                  data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -135,7 +135,7 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className='h-24 text-center'
+                  className="h-24 text-center"
                 >
                   No results.
                 </TableCell>
@@ -144,7 +144,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className='mt-10'>
+      <div className="mt-10">
         <DataTablePagination table={table} />
       </div>
     </div>

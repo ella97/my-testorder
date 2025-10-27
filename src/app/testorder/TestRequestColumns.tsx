@@ -275,8 +275,8 @@ export const TestRequestColumns = [
               variant="outline"
               className="data-[state=open]:bg-muted flex h-8 w-8 p-0"
               onClick={() =>
-                    router.push(`/testorder/details/${request.request_no}`)
-                  }
+                router.push(`/testorder/details/${request.request_no}`)
+              }
             >
               <SquareArrowUpRight className="text-green-400 h-4 w-4" />
               <span className="sr-only">Open</span>
@@ -293,7 +293,7 @@ export const TestRequestColumns = [
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className={`font-sans`}>
                 <DropdownMenuLabel className="uppercase text-sm">
-                   Request Actions
+                  Request Actions
                 </DropdownMenuLabel>
                 <DropdownMenuItem
                   className="cursor-pointer"

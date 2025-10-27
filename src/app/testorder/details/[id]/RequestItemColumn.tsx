@@ -31,7 +31,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-// import BarcodeSheet from '@/app/testorder/details/[id]/BarcodeSheet';
+import BarcodeSheet from "@/app/testorder/details/[id]/BarcodeSheet";
 import { useState } from "react";
 import {
   Tooltip,
@@ -112,7 +112,7 @@ export const RequestItemColumn = [
   },
   {
     accessorKey: "test_name",
-    header: "Specimen",
+    header: "Test Name",
     cell: ({ row }: any) => {
       const test_name = row.original?.test_name;
       //   const color = row.original?.sample_color;
@@ -140,6 +140,26 @@ export const RequestItemColumn = [
           </div>
         );
       }
+    },
+  },
+  {
+    accessorKey: "sample_name",
+    header: "Sample Name",
+    cell: ({ row }: any) => {
+      const sample_name = row.original?.sample_name;
+      //   const color = row.original?.sample_color;
+
+      return (
+        <div className="flex flex-row items-center space-x-1">
+          {/* <div
+            className="mr-2 h-4 w-4 rounded-full"
+            style={{ backgroundColor: color }}
+          /> */}
+          <p className={"font-semibold uppercase text-red-400"}>
+            {sample_name}
+          </p>
+        </div>
+      );
     },
   },
   {
@@ -214,8 +234,16 @@ export const RequestItemColumn = [
     cell: function Cell({ row }: any) {
       const request = row.original;
       const router = useRouter();
+      const [openBarcode, setOpenBarcode] = useState<boolean>(false);
+      const [openLog, setOpenLog] = useState<boolean>(false);
+      const [openRecollection, setOpenRecollection] = useState<boolean>(false);
       return (
         <>
+          <BarcodeSheet
+            open={openBarcode}
+            onOpen={setOpenBarcode}
+            options={request}
+          />
           <div className="flex flex-row items-center space-x-2">
             <TooltipProvider>
               <Tooltip>
@@ -224,6 +252,7 @@ export const RequestItemColumn = [
                     variant="outline"
                     size={"icon"}
                     className={"h-8 w-8 p-0"}
+                    onClick={() => setOpenBarcode(true)}
                   >
                     <ScanBarcode className="h-4 w-4" />
                   </Button>
